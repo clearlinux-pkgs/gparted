@@ -1,8 +1,3 @@
-Configure miss: pkexec >= 0.102
-Configure miss: gksudo
-Configure miss: gksu
-Configure miss: kdesudo
-Configure miss: xdg-su
 Configure miss: ped_file_system_resize in -lparted
 Configure miss: whether help documentation should be built
 Configure miss: gnome-doc-utils >= 0.3.2

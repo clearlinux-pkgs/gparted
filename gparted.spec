@@ -6,7 +6,7 @@
 #
 Name     : gparted
 Version  : 0.33.0
-Release  : 1
+Release  : 2
 URL      : https://downloads.sourceforge.net/project/gparted/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz
 Source0  : https://downloads.sourceforge.net/project/gparted/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz
 Source99 : https://downloads.sourceforge.net/project/gparted/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz.sig
@@ -28,6 +28,8 @@ BuildRequires : pkgconfig(gthread-2.0)
 BuildRequires : pkgconfig(gtkmm-2.4)
 BuildRequires : pkgconfig(libparted)
 BuildRequires : pkgconfig(sigc++-2.0)
+BuildRequires : polkit
+BuildRequires : polkit-dev
 
 %description
 GPARTED
@@ -85,7 +87,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1551462381
+export SOURCE_DATE_EPOCH=1551811444
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %configure --disable-static --disable-doc
 make  %{?_smp_mflags}
 
@@ -97,7 +100,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1551462381
+export SOURCE_DATE_EPOCH=1551811444
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/gparted
 cp COPYING %{buildroot}/usr/share/package-licenses/gparted/COPYING
@@ -123,6 +126,7 @@ cp lib/gtest/LICENSE %{buildroot}/usr/share/package-licenses/gparted/lib_gtest_L
 /usr/share/icons/hicolor/32x32/apps/gparted.png
 /usr/share/icons/hicolor/48x48/apps/gparted.png
 /usr/share/icons/hicolor/scalable/apps/gparted.svg
+/usr/share/polkit-1/actions/org.gnome.gparted.policy
 
 %files license
 %defattr(0644,root,root,0755)
