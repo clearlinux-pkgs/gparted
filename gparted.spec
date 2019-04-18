@@ -7,9 +7,9 @@
 Name     : gparted
 Version  : 0.33.0
 Release  : 2
-URL      : https://downloads.sourceforge.net/project/gparted/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz
-Source0  : https://downloads.sourceforge.net/project/gparted/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz
-Source99 : https://downloads.sourceforge.net/project/gparted/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz.sig
+URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz
+Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz
+Source99 : https://sourceforge.net/projects/gparted/files/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz.sig
 Summary  : A Partition Magic clone, frontend to GNU Parted
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0
