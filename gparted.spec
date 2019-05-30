@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x17A6D3FF338C9570 (gedakc@gmail.com)
 #
 Name     : gparted
-Version  : 0.33.0
-Release  : 2
-URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz
-Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz
-Source99 : https://sourceforge.net/projects/gparted/files/gparted/gparted-0.33.0/gparted-0.33.0.tar.gz.sig
+Version  : 1.0.0
+Release  : 3
+URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.0.0/gparted-1.0.0.tar.gz
+Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.0.0/gparted-1.0.0.tar.gz
+Source99 : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.0.0/gparted-1.0.0.tar.gz.sig
 Summary  : A Partition Magic clone, frontend to GNU Parted
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0
@@ -19,13 +19,12 @@ Requires: gparted-license = %{version}-%{release}
 Requires: gparted-locales = %{version}-%{release}
 Requires: gparted-man = %{version}-%{release}
 BuildRequires : gettext
-BuildRequires : gnome-doc-utils
 BuildRequires : intltool
 BuildRequires : parted-dev
 BuildRequires : perl(XML::Parser)
 BuildRequires : pkgconfig(glibmm-2.4)
 BuildRequires : pkgconfig(gthread-2.0)
-BuildRequires : pkgconfig(gtkmm-2.4)
+BuildRequires : pkgconfig(gtkmm-3.0)
 BuildRequires : pkgconfig(libparted)
 BuildRequires : pkgconfig(sigc++-2.0)
 BuildRequires : polkit
@@ -80,15 +79,21 @@ man components for the gparted package.
 
 
 %prep
-%setup -q -n gparted-0.33.0
+%setup -q -n gparted-1.0.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1551811444
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1559239457
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static --disable-doc
 make  %{?_smp_mflags}
 
@@ -100,7 +105,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1551811444
+export SOURCE_DATE_EPOCH=1559239457
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/gparted
 cp COPYING %{buildroot}/usr/share/package-licenses/gparted/COPYING
