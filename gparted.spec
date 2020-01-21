@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x17A6D3FF338C9570 (gedakc@gmail.com)
 #
 Name     : gparted
-Version  : 1.0.0
-Release  : 3
-URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.0.0/gparted-1.0.0.tar.gz
-Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.0.0/gparted-1.0.0.tar.gz
-Source99 : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.0.0/gparted-1.0.0.tar.gz.sig
-Summary  : A Partition Magic clone, frontend to GNU Parted
+Version  : 1.1.0
+Release  : 4
+URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.1.0/gparted-1.1.0.tar.gz
+Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.1.0/gparted-1.1.0.tar.gz
+Source1  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.1.0/gparted-1.1.0.tar.gz.sig
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0
 Requires: gparted-bin = %{version}-%{release}
@@ -79,14 +79,16 @@ man components for the gparted package.
 
 
 %prep
-%setup -q -n gparted-1.0.0
+%setup -q -n gparted-1.1.0
+cd %{_builddir}/gparted-1.1.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1559239457
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1579620402
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -98,18 +100,18 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1559239457
+export SOURCE_DATE_EPOCH=1579620402
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/gparted
-cp COPYING %{buildroot}/usr/share/package-licenses/gparted/COPYING
-cp lib/gtest/LICENSE %{buildroot}/usr/share/package-licenses/gparted/lib_gtest_LICENSE
+cp %{_builddir}/gparted-1.1.0/COPYING %{buildroot}/usr/share/package-licenses/gparted/dfac199a7539a404407098a2541b9482279f690d
+cp %{_builddir}/gparted-1.1.0/lib/gtest/LICENSE %{buildroot}/usr/share/package-licenses/gparted/5a2314153eadadc69258a9429104cd11804ea304
 %make_install
 %find_lang gparted
 
@@ -135,8 +137,8 @@ cp lib/gtest/LICENSE %{buildroot}/usr/share/package-licenses/gparted/lib_gtest_L
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/gparted/COPYING
-/usr/share/package-licenses/gparted/lib_gtest_LICENSE
+/usr/share/package-licenses/gparted/5a2314153eadadc69258a9429104cd11804ea304
+/usr/share/package-licenses/gparted/dfac199a7539a404407098a2541b9482279f690d
 
 %files man
 %defattr(0644,root,root,0755)
