@@ -6,7 +6,7 @@
 #
 Name     : gparted
 Version  : 1.1.0
-Release  : 4
+Release  : 5
 URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.1.0/gparted-1.1.0.tar.gz
 Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.1.0/gparted-1.1.0.tar.gz
 Source1  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.1.0/gparted-1.1.0.tar.gz.sig
@@ -87,14 +87,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1579620402
+export SOURCE_DATE_EPOCH=1586232429
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static --disable-doc
 make  %{?_smp_mflags}
@@ -107,7 +107,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1579620402
+export SOURCE_DATE_EPOCH=1586232429
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/gparted
 cp %{_builddir}/gparted-1.1.0/COPYING %{buildroot}/usr/share/package-licenses/gparted/dfac199a7539a404407098a2541b9482279f690d
