@@ -6,7 +6,7 @@
 #
 Name     : gparted
 Version  : 1.1.0
-Release  : 5
+Release  : 6
 URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.1.0/gparted-1.1.0.tar.gz
 Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.1.0/gparted-1.1.0.tar.gz
 Source1  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.1.0/gparted-1.1.0.tar.gz.sig
