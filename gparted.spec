@@ -5,16 +5,17 @@
 # Source0 file verified with key 0x17A6D3FF338C9570 (gedakc@gmail.com)
 #
 Name     : gparted
-Version  : 1.2.0
-Release  : 7
-URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.2.0/gparted-1.2.0.tar.gz
-Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.2.0/gparted-1.2.0.tar.gz
-Source1  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.2.0/gparted-1.2.0.tar.gz.sig
+Version  : 1.3.0
+Release  : 8
+URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.3.0/gparted-1.3.0.tar.gz
+Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.3.0/gparted-1.3.0.tar.gz
+Source1  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.3.0/gparted-1.3.0.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0
 Requires: gparted-bin = %{version}-%{release}
 Requires: gparted-data = %{version}-%{release}
+Requires: gparted-libexec = %{version}-%{release}
 Requires: gparted-license = %{version}-%{release}
 Requires: gparted-locales = %{version}-%{release}
 Requires: gparted-man = %{version}-%{release}
@@ -40,6 +41,7 @@ deleting disk partitions.
 Summary: bin components for the gparted package.
 Group: Binaries
 Requires: gparted-data = %{version}-%{release}
+Requires: gparted-libexec = %{version}-%{release}
 Requires: gparted-license = %{version}-%{release}
 
 %description bin
@@ -52,6 +54,15 @@ Group: Data
 
 %description data
 data components for the gparted package.
+
+
+%package libexec
+Summary: libexec components for the gparted package.
+Group: Default
+Requires: gparted-license = %{version}-%{release}
+
+%description libexec
+libexec components for the gparted package.
 
 
 %package license
@@ -79,15 +90,15 @@ man components for the gparted package.
 
 
 %prep
-%setup -q -n gparted-1.2.0
-cd %{_builddir}/gparted-1.2.0
+%setup -q -n gparted-1.3.0
+cd %{_builddir}/gparted-1.3.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1611613658
+export SOURCE_DATE_EPOCH=1620063927
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -107,11 +118,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1611613658
+export SOURCE_DATE_EPOCH=1620063927
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/gparted
-cp %{_builddir}/gparted-1.2.0/COPYING %{buildroot}/usr/share/package-licenses/gparted/dfac199a7539a404407098a2541b9482279f690d
-cp %{_builddir}/gparted-1.2.0/lib/gtest/LICENSE %{buildroot}/usr/share/package-licenses/gparted/5a2314153eadadc69258a9429104cd11804ea304
+cp %{_builddir}/gparted-1.3.0/COPYING %{buildroot}/usr/share/package-licenses/gparted/dfac199a7539a404407098a2541b9482279f690d
+cp %{_builddir}/gparted-1.3.0/lib/gtest/LICENSE %{buildroot}/usr/share/package-licenses/gparted/5a2314153eadadc69258a9429104cd11804ea304
 %make_install
 %find_lang gparted
 
@@ -121,7 +132,6 @@ cp %{_builddir}/gparted-1.2.0/lib/gtest/LICENSE %{buildroot}/usr/share/package-l
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/gparted
-/usr/bin/gpartedbin
 
 %files data
 %defattr(-,root,root,-)
@@ -134,6 +144,10 @@ cp %{_builddir}/gparted-1.2.0/lib/gtest/LICENSE %{buildroot}/usr/share/package-l
 /usr/share/icons/hicolor/48x48/apps/gparted.png
 /usr/share/icons/hicolor/scalable/apps/gparted.svg
 /usr/share/polkit-1/actions/org.gnome.gparted.policy
+
+%files libexec
+%defattr(-,root,root,-)
+/usr/libexec/gpartedbin
 
 %files license
 %defattr(0644,root,root,0755)
