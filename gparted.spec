@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x17A6D3FF338C9570 (gedakc@gmail.com)
 #
 Name     : gparted
-Version  : 1.3.0
-Release  : 8
-URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.3.0/gparted-1.3.0.tar.gz
-Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.3.0/gparted-1.3.0.tar.gz
-Source1  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.3.0/gparted-1.3.0.tar.gz.sig
+Version  : 1.3.1
+Release  : 9
+URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.3.1/gparted-1.3.1.tar.gz
+Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.3.1/gparted-1.3.1.tar.gz
+Source1  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.3.1/gparted-1.3.1.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0
@@ -25,6 +25,7 @@ BuildRequires : parted-dev
 BuildRequires : perl(XML::Parser)
 BuildRequires : pkgconfig(glibmm-2.4)
 BuildRequires : pkgconfig(gthread-2.0)
+BuildRequires : pkgconfig(gtk+-3.0)
 BuildRequires : pkgconfig(gtkmm-3.0)
 BuildRequires : pkgconfig(libparted)
 BuildRequires : pkgconfig(sigc++-2.0)
@@ -90,15 +91,15 @@ man components for the gparted package.
 
 
 %prep
-%setup -q -n gparted-1.3.0
-cd %{_builddir}/gparted-1.3.0
+%setup -q -n gparted-1.3.1
+cd %{_builddir}/gparted-1.3.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1620063927
+export SOURCE_DATE_EPOCH=1626793650
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -118,11 +119,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1620063927
+export SOURCE_DATE_EPOCH=1626793650
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/gparted
-cp %{_builddir}/gparted-1.3.0/COPYING %{buildroot}/usr/share/package-licenses/gparted/dfac199a7539a404407098a2541b9482279f690d
-cp %{_builddir}/gparted-1.3.0/lib/gtest/LICENSE %{buildroot}/usr/share/package-licenses/gparted/5a2314153eadadc69258a9429104cd11804ea304
+cp %{_builddir}/gparted-1.3.1/COPYING %{buildroot}/usr/share/package-licenses/gparted/dfac199a7539a404407098a2541b9482279f690d
+cp %{_builddir}/gparted-1.3.1/lib/gtest/LICENSE %{buildroot}/usr/share/package-licenses/gparted/5a2314153eadadc69258a9429104cd11804ea304
 %make_install
 %find_lang gparted
 
