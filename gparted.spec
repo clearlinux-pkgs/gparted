@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x17A6D3FF338C9570 (gedakc@gmail.com)
 #
 Name     : gparted
-Version  : 1.4.0
-Release  : 10
-URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.4.0/gparted-1.4.0.tar.gz
-Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.4.0/gparted-1.4.0.tar.gz
-Source1  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.4.0/gparted-1.4.0.tar.gz.sig
+Version  : 1.5.0
+Release  : 11
+URL      : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.5.0/gparted-1.5.0.tar.gz
+Source0  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.5.0/gparted-1.5.0.tar.gz
+Source1  : https://sourceforge.net/projects/gparted/files/gparted/gparted-1.5.0/gparted-1.5.0.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0
@@ -20,7 +20,6 @@ Requires: gparted-license = %{version}-%{release}
 Requires: gparted-locales = %{version}-%{release}
 Requires: gparted-man = %{version}-%{release}
 BuildRequires : gettext
-BuildRequires : intltool
 BuildRequires : parted-dev
 BuildRequires : perl(XML::Parser)
 BuildRequires : pkgconfig(glibmm-2.4)
@@ -31,6 +30,9 @@ BuildRequires : pkgconfig(libparted)
 BuildRequires : pkgconfig(sigc++-2.0)
 BuildRequires : polkit
 BuildRequires : polkit-dev
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 GPARTED
@@ -91,23 +93,23 @@ man components for the gparted package.
 
 
 %prep
-%setup -q -n gparted-1.4.0
-cd %{_builddir}/gparted-1.4.0
+%setup -q -n gparted-1.5.0
+cd %{_builddir}/gparted-1.5.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1648650795
+export SOURCE_DATE_EPOCH=1677004279
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 %configure --disable-static --disable-doc
 make  %{?_smp_mflags}
 
@@ -119,11 +121,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1648650795
+export SOURCE_DATE_EPOCH=1677004279
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/gparted
-cp %{_builddir}/gparted-1.4.0/COPYING %{buildroot}/usr/share/package-licenses/gparted/dfac199a7539a404407098a2541b9482279f690d
-cp %{_builddir}/gparted-1.4.0/lib/gtest/LICENSE %{buildroot}/usr/share/package-licenses/gparted/5a2314153eadadc69258a9429104cd11804ea304
+cp %{_builddir}/gparted-%{version}/COPYING %{buildroot}/usr/share/package-licenses/gparted/dfac199a7539a404407098a2541b9482279f690d || :
+cp %{_builddir}/gparted-%{version}/lib/gtest/LICENSE %{buildroot}/usr/share/package-licenses/gparted/5a2314153eadadc69258a9429104cd11804ea304 || :
 %make_install
 %find_lang gparted
 
