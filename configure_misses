@@ -1,4 +1,8 @@
 Configure miss: ped_file_system_resize in -lparted
+Configure miss: ped_file_system_resize in -lparted
+Configure miss: whether help documentation should be built
 Configure miss: whether help documentation should be built
 Configure miss: whether to explicitly grant root access to the display
+Configure miss: whether to explicitly grant root access to the display
+Configure miss: whether to use native libparted /dev/mapper dmraid support
 Configure miss: whether to use native libparted /dev/mapper dmraid support
