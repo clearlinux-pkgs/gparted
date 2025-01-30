@@ -1,5 +1,5 @@
-Configure miss: ped_file_system_resize in -lparted
-Configure miss: ped_file_system_resize in -lparted
+Configure miss: g++ option to enable C++11 features
+Configure miss: g++ option to enable C++11 features
 Configure miss: whether help documentation should be built
 Configure miss: whether help documentation should be built
 Configure miss: whether to explicitly grant root access to the display
